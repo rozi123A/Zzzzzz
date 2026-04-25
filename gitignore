@@ -1,0 +1,60 @@
+# ============================================
+# ⚠️  ملف تجاهل - لا ترفع هذا الملف!
+# ============================================
+# يحتوي على قائمة الملفات التي يجب عدم رفعها
+# ============================================
+
+# === ملفات البيئة (مهم جداً!) ===
+# لا ترفع أبداً! ضع المتغيرات هنا ثم ارفع يدوياً في Render
+.env
+.env
+.env.local
+.env.production
+.env.*.bak
+
+# === التوكنات والبيانات الحساسة ===
+credentials.json
+*.pem
+*.key
+*.crt
+*.p12
+secrets.yml
+config.yml
+docker-compose.yml
+docker-compose.override.yml
+.vscode/
+!.vscode/
+
+# === بيانات المستخدم ===
+data.json
+*.db
+*.sqlite
+*.db-journal
+*.db-wal
+*.db-shm
+*.db-sqlite3
+*.db-wal-shm
+*.db-sqlite3-shm
+*.db-sqlite3-wal
+
+# === سجلات التطوير ===
+node_modules/
+dist/
+build/
+.npmrc
+.yarn-integrity
+.pnp.js
+pnpm-lock.yaml
+.log
+.DS_Store
+Thumbs.db
+npm-debug.log
+.yarn-error.log
+.yarn-state.yaml
+.eslintcache
+.cache
+.parcel-cache
+.gruntfile
+.turbo
+.babelrc
+.idea
