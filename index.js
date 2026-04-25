@@ -2,10 +2,46 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const cors = require('cors');
+const TelegramBot = require('node-telegram-bot-api');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const BOT_TOKEN = process.env.BOT_TOKEN || '';
+
+// ===== تهيئة البوت =====
+if (BOT_TOKEN) {
+  const bot = new TelegramBot(BOT_TOKEN, { polling: true });
+
+  const WEB_APP_URL = 'https://bott-wm0j.onrender.com';
+
+  bot.onText(/\/start/, (msg) => {
+    const chatId = msg.chat.id;
+    const name = msg.from.first_name || 'صديقي';
+
+    bot.sendMessage(chatId, `👋 أهلاً ${name}!\n\n🌟 مرحباً بك في Rain Star\nاضغط الزر أدناه لفتح التطبيق:`, {
+      reply_markup: {
+        inline_keyboard: [[
+          {
+            text: '🌟 Open Rain Star',
+            web_app: { url: WEB_APP_URL }
+          }
+        ]]
+      }
+    });
+  });
+
+  bot.on('polling_error', (error) => {
+    console.error('Polling error:', error.message);
+  });
+
+  process.on('unhandledRejection', (reason) => {
+    console.error('Unhandled Rejection:', reason);
+  });
+
+  console.log('✅ Telegram Bot يعمل...');
+} else {
+  console.warn('⚠️ BOT_TOKEN غير موجود، البوت لن يعمل.');
+}
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
@@ -170,20 +206,20 @@ app.get('/api/withdraws/:id', (req, res) => {
   }
 });
 
-// صفحة رئيسية
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'publpublipublic', 'index.html')));
 
 app.listen(PORT, () => {
   console.log(`
 ╔══════════════════════════════════════╗
-║                                            ║
-║   🌟 RAIN STAR PRO - ONLINE ✅           ║
-║                                            ║
-║   Port:     ${PORT.toString().padEnd(26)}              ║
-║   Ads:      ✅ Working                      ║
-║   Withdraw: ✅ Working                     ║
-║   Time:     ${new Date().toLocaleTimeString().padEnd(26)}   ║
-║                                            ║
+║                                      ║
+║   🌟 RAIN STAR PRO - ONLINE ✅       ║
+║                                      ║
+║   Port:     ${PORT.toString().padEnd(27)}║
+║   Ads:      ✅ Working               ║
+║   Withdraw: ✅ Working               ║
+║   Bot:      ✅ Working               ║
+║   Time:     ${new Date().toLocaleTimeString().padEnd(27)}║
+║                                      ║
 ╚══════════════════════════════════════╝
   `);
 });
