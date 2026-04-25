@@ -11,20 +11,15 @@ const BOT_TOKEN = process.env.BOT_TOKEN || '';
 // ===== تهيئة البوت =====
 if (BOT_TOKEN) {
   const bot = new TelegramBot(BOT_TOKEN, { polling: true });
-
   const WEB_APP_URL = 'https://bott-wm0j.onrender.com';
 
   bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     const name = msg.from.first_name || 'صديقي';
-
     bot.sendMessage(chatId, `👋 أهلاً ${name}!\n\n🌟 مرحباً بك في Rain Star\nاضغط الزر أدناه لفتح التطبيق:`, {
       reply_markup: {
         inline_keyboard: [[
-          {
-            text: '🌟 Open Rain Star',
-            web_app: { url: WEB_APP_URL }
-          }
+          { text: '🌟 Open Rain Star', web_app: { url: WEB_APP_URL } }
         ]]
       }
     });
@@ -83,7 +78,7 @@ app.get('/api/user/:id', (req, res) => {
 
 app.post('/api/user/:id', (req, res) => {
   const data = loadData(), id = req.params.id;
-  if (!data.users[id]) data.users[id] = { id, name:'User', pts:0, stars:0, tasks:0, referrals:0, withdrawn:0, history:[], refCode:Math.random().toString(36).substr(2,8).toUpperCase(), adsWatched:0, adEarnings:0 };
+  if (!data.users[id]) data.users[id] = { id, name: 'User', pts: 0, stars: 0, tasks: 0, referrals: 0, withdrawn: 0, history: [], refCode: Math.random().toString(36).substr(2, 8).toUpperCase(), adsWatched: 0, adEarnings: 0 };
   if (req.body.name) data.users[id].name = req.body.name;
   saveData(data);
   res.json({ success: true });
@@ -163,7 +158,11 @@ app.get('/api/reflink/:id', (req, res) => {
   const data = loadData();
   const id = req.params.id;
   if (data.users[id]) {
-    res.json({ success: true, link: `https://t.me/YOUR_BOT_USERNAME?start=${data.users[id].refCode}`, code: data.users[id].refCode });
+    res.json({
+      success: true,
+      link: `https://t.me/ads_reward123_bot?start=${data.users[id].refCode}`,
+      code: data.users[id].refCode
+    });
   } else {
     res.json({ success: false });
   }
@@ -180,7 +179,11 @@ app.post('/api/withdraw/:id', (req, res) => {
   data.users[id].stars -= amount;
   data.users[id].withdrawn = (data.users[id].withdrawn || 0) + amount;
   data.stats.totalWithdrawn = (data.stats.totalWithdrawn || 0) + amount;
-  const withdrawRecord = { id: Date.now().toString(36), amount, method: method || 'binance', wallet: wallet || '', network: network || 'TRC20', status: 'pending', createdAt: new Date().toISOString(), processedAt: null, txHash: null };
+  const withdrawRecord = {
+    id: Date.now().toString(36), amount, method: method || 'binance',
+    wallet: wallet || '', network: network || 'TRC20', status: 'pending',
+    createdAt: new Date().toISOString(), processedAt: null, txHash: null
+  };
   if (!data.users[id].withdrawals) data.users[id].withdrawals = [];
   data.users[id].withdrawals.unshift(withdrawRecord);
   saveData(data);
@@ -217,7 +220,7 @@ app.listen(PORT, () => {
 ║   Port:     ${PORT.toString().padEnd(27)}║
 ║   Ads:      ✅ Working               ║
 ║   Withdraw: ✅ Working               ║
-║   Bot:      ✅ Working               ║
+║   Bot:      ✅ @ads_reward123_bot    ║
 ║   Time:     ${new Date().toLocaleTimeString().padEnd(27)}║
 ║                                      ║
 ╚══════════════════════════════════════╝
