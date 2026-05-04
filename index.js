@@ -209,6 +209,39 @@ app.get('/api/withdraws/:id', (req, res) => {
   }
 });
 
+
+// ===== Daily Gift =====
+app.post('/api/daily-gift/:id', (req, res) => {
+  const data = loadData();
+  const id = req.params.id;
+  if (!data.users[id]) return res.json({ success: false, error: 'User not found' });
+  const now = Date.now();
+  const last = data.users[id].lastDailyGift || 0;
+  const ONE_DAY = 24 * 60 * 60 * 1000;
+  if (now - last < ONE_DAY) {
+    const remaining = ONE_DAY - (now - last);
+    const h = Math.floor(remaining / 3600000);
+    const m = Math.floor((remaining % 3600000) / 60000);
+    return res.json({ success: false, error: `🎁 الهدية القادمة بعد ${h}س ${m}د`, remainingMs: remaining });
+  }
+  const rewards = [
+    { pts: 100,  weight: 40, tier: 'common'    },
+    { pts: 250,  weight: 30, tier: 'uncommon'  },
+    { pts: 500,  weight: 18, tier: 'rare'      },
+    { pts: 1000, weight: 9,  tier: 'epic'      },
+    { pts: 3000, weight: 3,  tier: 'legendary' }
+  ];
+  const total = rewards.reduce((s, r) => s + r.weight, 0);
+  let roll = Math.random() * total, picked = rewards[0];
+  for (const r of rewards) { roll -= r.weight; if (roll <= 0) { picked = r; break; } }
+  data.users[id].pts += picked.pts;
+  data.users[id].stars = Math.floor(data.users[id].pts / 1000);
+  data.users[id].lastDailyGift = now;
+  data.users[id].dailyStreak = (data.users[id].dailyStreak || 0) + 1;
+  saveData(data);
+  res.json({ success: true, reward: picked.pts, tier: picked.tier, streak: data.users[id].dailyStreak, totalPts: data.users[id].pts, totalStars: data.users[id].stars });
+});
+
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'publpublipublic', 'index.html')));
 
 app.listen(PORT, () => {
