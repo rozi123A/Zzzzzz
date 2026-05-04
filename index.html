@@ -8,757 +8,360 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#f5f5f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--gold:#f59e0b;--gold-dark:#d97706;--green:#10b981;--blue:#3b82f6;--purple:#8b5cf6;--red:#ef4444;--border:#e5e7eb;--shadow:0 2px 12px rgba(0,0,0,.08);--radius:16px}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
-.header{background:linear-gradient(135deg,#667eea,#764ba2);padding:16px;display:flex;align-items:center;justify-content:space-between;color:white;position:sticky;top:0;z-index:100}
-.header h1{font-size:20px;font-weight:800}.header-icon{font-size:24px;cursor:pointer}
+:root{--bg:#0f172a;--card:#1e293b;--text:#f8fafc;--muted:#94a3b8;--gold:#fbbf24;--gold-dark:#d97706;--green:#10b981;--blue:#3b82f6;--purple:#8b5cf6;--red:#ef4444;--border:#334155;--shadow:0 10px 25px -5px rgba(0,0,0,0.3);--radius:20px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.header{background:linear-gradient(135deg,#1e293b,#0f172a);padding:16px;display:flex;align-items:center;justify-content:space-between;color:white;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border)}
+.header h1{font-size:20px;font-weight:800;background:linear-gradient(to right, #fbbf24, #f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .container{max-width:480px;margin:0 auto;padding:12px 16px 100px}
-.card{background:var(--card);border-radius:var(--radius);padding:20px;margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--border)}
-.balance-card{background:linear-gradient(135deg,#667eea,#764ba2);border-radius:var(--radius);padding:24px;color:white;text-align:center;margin-bottom:16px}
-.balance-label{font-size:14px;opacity:.9;margin-bottom:8px}
-.balance-amount{font-size:42px;font-weight:800}
-.balance-stars{font-size:16px;opacity:.9;margin-top:4px}
-.quick-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
-.action-btn{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;text-align:center;cursor:pointer;transition:.2s}
-.action-btn:active{transform:scale(.97)}
-.action-btn-icon{font-size:32px;margin-bottom:8px}
-.action-btn-title{font-weight:700;font-size:14px}
-.action-btn-desc{font-size:11px;color:var(--muted);margin-top:2px}
-.stats-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);margin-bottom:12px}
-.stat-item{text-align:center;flex:1}
-.stat-value{font-size:22px;font-weight:800;color:var(--gold)}
-.stat-label{font-size:11px;color:var(--muted);margin-top:2px}
-.rules-card{background:linear-gradient(135deg,#fef3c7,#fde68a);border:1px solid #fbbf24;border-radius:var(--radius);padding:16px;margin-bottom:14px}
-.rules-title{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:10px;color:#92400e;font-size:14px}
-.rules-list{font-size:13px;line-height:1.8;color:#78350f;padding-right:16px}
-.rules-list li{margin-bottom:4px}
-.promo-banner{background:linear-gradient(135deg,#667eea,#764ba2);border-radius:var(--radius);padding:16px;display:flex;align-items:center;gap:12px;color:white;margin-bottom:14px}
-.promo-text{flex:1;font-weight:600;font-size:14px}
-.promo-btn{background:white;color:#667eea;padding:8px 18px;border-radius:999px;font-weight:600;font-size:12px;border:none;cursor:pointer}
-.settings-list .setting-item{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border)}
-.setting-item:last-child{border:none}
-.setting-left{display:flex;align-items:center;gap:12px}
-.setting-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;background:#f3f4f6}
-.setting-name{font-weight:600;font-size:14px}
-.footer{text-align:center;padding:20px 0;color:var(--muted);font-size:12px}
+.balance-card{background:linear-gradient(135deg,#334155,#1e293b);border-radius:var(--radius);padding:24px;color:white;text-align:center;margin-bottom:16px;border:1px solid var(--border);box-shadow:var(--shadow)}
+.balance-label{font-size:14px;opacity:.8;margin-bottom:8px;letter-spacing:1px}
+.balance-amount{font-size:42px;font-weight:800;text-shadow:0 0 20px rgba(251,191,36,0.3)}
+.balance-stars{font-size:16px;opacity:.9;margin-top:4px;color:var(--gold)}
+
+/* === 3D Daily Gift Section === */
+.gift3d-container {
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    border-radius: 24px;
+    padding: 30px 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.gift3d-container::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(251, 191, 36, 0.1), transparent 30%);
+    animation: rotateBg 10s linear infinite;
+    z-index: 0;
+}
+@keyframes rotateBg {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.gift3d-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--gold);
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.gift3d-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+.gift3d-scene {
+    width: 150px;
+    height: 150px;
+    perspective: 1000px;
+    margin: 0 auto 30px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+.gift3d-box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-20deg) rotateY(45deg);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: floatBox 3s ease-in-out infinite;
+}
+@keyframes floatBox {
+    0%, 100% { transform: rotateX(-20deg) rotateY(45deg) translateY(0); }
+    50% { transform: rotateX(-20deg) rotateY(45deg) translateY(-15px); }
+}
+.gift3d-box.opening {
+    animation: openBox 1.5s forwards;
+}
+@keyframes openBox {
+    0% { transform: rotateX(-20deg) rotateY(45deg) scale(1); }
+    20% { transform: rotateX(-20deg) rotateY(45deg) scale(1.1) rotateZ(5deg); }
+    40% { transform: rotateX(-20deg) rotateY(45deg) scale(1.1) rotateZ(-5deg); }
+    60% { transform: rotateX(-20deg) rotateY(45deg) scale(1.2); }
+    100% { transform: rotateX(-20deg) rotateY(45deg) scale(0) opacity: 0; }
+}
+.gift-face {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border: 2px solid #b45309;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+}
+/* Ribbon Design */
+.gift-face::before {
+    content: '';
+    position: absolute;
+    background: #fef3c7;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.face-front  { transform: translateZ(75px); }
+.face-back   { transform: rotateY(180deg) translateZ(75px); }
+.face-right  { transform: rotateY(90deg) translateZ(75px); }
+.face-left   { transform: rotateY(-90deg) translateZ(75px); }
+.face-top    { transform: rotateX(90deg) translateZ(75px); background: #fbbf24; }
+.face-bottom { transform: rotateX(-90deg) translateZ(75px); background: #92400e; }
+
+/* Vertical Ribbon */
+.face-front::before, .face-back::before, .face-top::before, .face-bottom::before {
+    width: 30px; height: 100%; left: 60px; top: 0;
+}
+/* Horizontal Ribbon */
+.face-left::before, .face-right::before, .face-top::after, .face-bottom::after {
+    content: ''; position: absolute; background: #fef3c7;
+    width: 100%; height: 30px; top: 60px; left: 0;
+}
+
+.gift-lid {
+    position: absolute;
+    width: 160px;
+    height: 40px;
+    top: -20px;
+    left: -5px;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+}
+
+.claim-btn {
+    background: linear-gradient(135deg, #fbbf24, #d97706);
+    color: #000;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(217, 119, 6, 0.4);
+    transition: all 0.3s;
+    position: relative;
+    z-index: 1;
+}
+.claim-btn:active { transform: scale(0.95); }
+.claim-btn:disabled { background: #475569; color: #94a3b8; box-shadow: none; cursor: not-allowed; }
+
+/* Bottom Nav */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;padding:8px 0;padding-bottom:max(8px,env(safe-area-inset-bottom));z-index:100}
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;color:var(--muted);text-decoration:none;font-size:11px;font-weight:500;transition:.2s}
 .nav-item.active{color:var(--gold)}
 .nav-icon{font-size:20px}
-.nav-label{font-size:10px}
-.page{display:none;animation:fadeIn .3s ease}
-.page.active{display:block}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.task-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
-.task-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;background:linear-gradient(135deg,#fef3c7,#fde68a)}
-.task-info{flex:1}
-.task-title{font-weight:700;font-size:15px;margin-bottom:2px}
-.task-reward{font-size:13px;color:var(--gold);font-weight:600}
-.task-btn{background:linear-gradient(135deg,var(--green),#059669);color:white;border:none;padding:10px 18px;border-radius:999px;font-weight:600;font-size:12px;cursor:pointer}
-.ad-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px}
-.ad-header{text-align:center;margin-bottom:16px}
-.ad-header h2{font-size:18px;font-weight:800}
-.ad-header p{font-size:13px;color:var(--muted);margin-top:4px}
-.ad-container{background:#f9fafb;border:2px dashed var(--border);border-radius:var(--radius);min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:14px;position:relative;overflow:hidden}
-#ad-frame{width:100%;height:220px;border:none;border-radius:var(--radius)}
-.ad-loading{text-align:center;padding:20px}
-.ad-loading .spinner{width:40px;height:40px;border:4px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px}
-.ad-timer{display:none;text-align:center;padding:14px;background:#fef3c7;border-radius:var(--radius);margin-top:12px}
-.timer-text{font-weight:700;color:#92400e;margin-bottom:8px;font-size:14px}
-.timer-bar{height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden;margin-top:8px}
-.timer-fill{height:100%;background:linear-gradient(90deg,var(--gold),#f59e0b);border-radius:4px;transition:width 1s linear;width:100%}
-.ad-complete{text-align:center;padding:24px}
-.ad-complete .check-icon{font-size:56px;margin-bottom:12px}
-.ad-complete .points{font-size:28px;font-weight:800;color:var(--green)}
-.ad-complete .msg{font-size:14px;color:var(--muted)}
-.invite-card{background:linear-gradient(135deg,#ddd6fe,#c4b5fd);border-radius:var(--radius);padding:24px;text-align:center;margin-bottom:16px}
-.invite-code{font-size:36px;font-weight:800;color:#7c3aed;letter-spacing:4px;margin:12px 0}
-.invite-link{background:rgba(255,255,255,.5);padding:10px;border-radius:8px;font-size:12px;word-break:all;margin-bottom:12px}
-.copy-btn{background:#7c3aed;color:white;border:none;padding:12px 24px;border-radius:999px;font-weight:600;cursor:pointer;width:100%;max-width:200px;margin:0 auto}
-.ref-stats{display:flex;justify-content:space-around;margin-top:16px;padding-top:16px;border-top:1px solid rgba(124,58,237,.2)}
-.ref-stat{text-align:center}
-.ref-stat-val{font-size:22px;font-weight:800;color:#7c3aed}
-.ref-stat-label{font-size:11px;color:#6d28d9}
-.withdraw-form{margin-bottom:16px}
-.form-group{margin-bottom:14px}
-.form-label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:6px}
-.form-input{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:var(--radius);font-size:15px;outline:none;transition:border-color .2s}
-.form-input:focus{border-color:var(--gold)}
-.form-select{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:var(--radius);font-size:15px;background:var(--card);outline:none}
-.method-option{display:flex;align-items:center;gap:12px;padding:14px;border:2px solid var(--border);border-radius:var(--radius);margin-bottom:10px;cursor:pointer;transition:.2s}
-.method-option.selected{border-color:var(--gold);background:#fefce8}
-.method-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
-.submit-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--gold),#d97706);color:#111;border:none;border-radius:var(--radius);font-size:16px;font-weight:700;cursor:pointer;transition:.2s}
-.submit-btn:disabled{opacity:.5;cursor:not-allowed}
-.submit-btn:active:not(:disabled){transform:scale(.98)}
-.history-list{margin-top:16px}
-.history-empty{text-align:center;padding:32px;color:var(--muted);font-size:13px}
-.history-item{display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px}
-.history-left{display:flex;align-items:center;gap:10px}
-.history-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;background:#fef3c7}
-.history-amount{font-weight:700;font-size:15px}
-.history-date{font-size:11px;color:var(--muted)}
-.history-status{font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px}
-.status-pending{background:#fef3c7;color:#92400e}
-.status-approved{background:#d1fae5;color:#065f46}
-.status-rejected{background:#fee2e2;color:#991b1b}
-.toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-120px);background:#1a1a2e;color:white;padding:14px 24px;border-radius:12px;z-index:999;box-shadow:0 8px 30px rgba(0,0,0,.3);transition:transform .35s cubic-bezier(.34,1.56,.64,1);max-width:90%}
-.toast.show{transform:translateX(-50%) translateY(0)}
-.toast.error{background:#dc2626}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
-.modal-overlay.show{display:flex}
-.modal-box{background:var(--card);border-radius:24px;padding:28px 24px;max-width:340px;width:100%;text-align:center;animation:modalIn .3s ease}
-@keyframes modalIn{from{scale:.85;opacity:0}to{scale:1;opacity:1}}
-.modal-icon{font-size:48px;margin-bottom:12px}
-.modal-title{font-size:20px;font-weight:800;margin-bottom:8px}
-.modal-text{font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.6}
-.modal-btn{padding:12px 28px;border-radius:999px;font-weight:600;cursor:pointer;border:none;margin:6px}
-.modal-btn-primary{background:linear-gradient(135deg,var(--gold),#d97706);color:#111}
-.modal-btn-secondary{background:var(--card);color:var(--text)}
-@keyframes spin{to{transform:rotate(360deg)}}
 
-/* === 3D Daily Gift === */
-.gift3d-card{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:20px;padding:24px 16px;text-align:center;margin-bottom:14px;position:relative;overflow:hidden;border:1px solid rgba(245,158,11,.3)}
-.gift3d-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(245,158,11,.25),transparent 60%);pointer-events:none}
-.gift3d-title{color:#fbbf24;font-weight:800;font-size:18px;margin-bottom:4px;position:relative}
-.gift3d-sub{color:#cbd5e1;font-size:12px;margin-bottom:18px;position:relative}
-.gift3d-stage{perspective:900px;height:200px;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:16px}
-.gift3d-box{width:130px;height:130px;position:relative;transform-style:preserve-3d;transform:rotateX(-18deg) rotateY(-25deg);animation:gFloat 3s ease-in-out infinite;cursor:pointer}
-.gift3d-face{position:absolute;width:130px;height:130px;background:linear-gradient(135deg,#ef4444,#b91c1c);border:2px solid #fbbf24;box-shadow:inset 0 0 30px rgba(0,0,0,.3)}
-.gift3d-face.front{transform:translateZ(65px)}
-.gift3d-face.back{transform:translateZ(-65px) rotateY(180deg)}
-.gift3d-face.right{transform:rotateY(90deg) translateZ(65px)}
-.gift3d-face.left{transform:rotateY(-90deg) translateZ(65px)}
-.gift3d-face.top{transform:rotateX(90deg) translateZ(65px);background:linear-gradient(135deg,#dc2626,#7f1d1d);transition:transform .8s cubic-bezier(.5,-.5,.3,1.5)}
-.gift3d-face.bottom{transform:rotateX(-90deg) translateZ(65px)}
-.gift3d-box.opened .gift3d-face.top{transform:rotateX(90deg) translateZ(65px) translateY(-90px) rotateZ(25deg)}
-.gift3d-ribbon-v{position:absolute;width:22px;height:130px;left:54px;background:linear-gradient(90deg,#fbbf24,#f59e0b,#fbbf24);box-shadow:0 0 10px rgba(251,191,36,.6)}
-.gift3d-ribbon-h{position:absolute;height:22px;width:130px;top:54px;background:linear-gradient(180deg,#fbbf24,#f59e0b,#fbbf24);box-shadow:0 0 10px rgba(251,191,36,.6)}
-.gift3d-bow{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:36px;filter:drop-shadow(0 0 8px rgba(251,191,36,.8))}
-.gift3d-glow{position:absolute;inset:-40px;background:radial-gradient(circle,rgba(251,191,36,.4),transparent 70%);animation:gPulse 2s ease-in-out infinite;pointer-events:none}
-@keyframes gFloat{0%,100%{transform:rotateX(-18deg) rotateY(-25deg) translateY(0)}50%{transform:rotateX(-18deg) rotateY(-25deg) translateY(-10px)}}
-@keyframes gPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
-.gift3d-box.opened{animation:gOpen 1.2s ease forwards}
-@keyframes gOpen{0%{transform:rotateX(-18deg) rotateY(-25deg) scale(1)}40%{transform:rotateX(-18deg) rotateY(-25deg) scale(1.15)}100%{transform:rotateX(-18deg) rotateY(385deg) scale(.6);opacity:0}}
-.gift3d-reward{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);opacity:0;font-size:38px;font-weight:900;color:#fbbf24;text-shadow:0 0 20px #fbbf24,0 0 40px #f59e0b;text-align:center}
-.gift3d-reward.show{animation:gReward 1.4s .8s ease forwards}
-@keyframes gReward{0%{transform:translate(-50%,-50%) scale(0) rotate(-180deg);opacity:0}60%{transform:translate(-50%,-50%) scale(1.3) rotate(10deg);opacity:1}100%{transform:translate(-50%,-50%) scale(1) rotate(0);opacity:1}}
-.gift3d-tier{font-size:13px;margin-top:6px;font-weight:700;display:block}
-.gift3d-btn{background:linear-gradient(135deg,#fbbf24,#d97706);color:#1a1a2e;border:none;padding:14px 36px;border-radius:999px;font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 6px 20px rgba(251,191,36,.4);transition:.2s}
-.gift3d-btn:active{transform:scale(.96)}
-.gift3d-btn:disabled{opacity:.5;cursor:not-allowed;background:#475569;color:#cbd5e1;box-shadow:none}
-.gift3d-streak{display:inline-flex;align-items:center;gap:6px;background:rgba(251,191,36,.15);color:#fbbf24;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:12px;border:1px solid rgba(251,191,36,.3)}
-.gift3d-confetti{position:absolute;width:8px;height:8px;pointer-events:none;opacity:0}
-.gift3d-confetti.go{animation:gConfetti 1.6s ease-out forwards}
-@keyframes gConfetti{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--tx),var(--ty)) rotate(720deg)}}
-.tier-common{color:#94a3b8}.tier-uncommon{color:#10b981}.tier-rare{color:#3b82f6}.tier-epic{color:#a855f7}.tier-legendary{color:#fbbf24;text-shadow:0 0 10px #fbbf24}
+/* Toast & Modal */
+.toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-120px);background:#1e293b;color:white;padding:14px 24px;border-radius:12px;z-index:999;box-shadow:0 8px 30px rgba(0,0,0,.5);transition:transform .35s cubic-bezier(.34,1.56,.64,1);max-width:90%;border:1px solid var(--border)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal-box{background:var(--card);border-radius:24px;padding:30px;max-width:340px;width:100%;text-align:center;border:1px solid var(--border);animation:modalIn .4s cubic-bezier(0.175, 0.885, 0.32, 1.275)}
+@keyframes modalIn{from{transform:scale(0.8) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.reward-glow {
+    width: 80px; height: 80px; background: var(--gold); border-radius: 50%; margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center; font-size: 40px;
+    box-shadow: 0 0 30px var(--gold); animation: pulse 2s infinite;
+}
+@keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 20px var(--gold); } 50% { transform: scale(1.1); box-shadow: 0 0 40px var(--gold); } 100% { transform: scale(1); box-shadow: 0 0 20px var(--gold); } }
 
 </style>
 </head>
 <body>
 
-<header class="header">
-  <span class="header-icon" onclick="Telegram.WebApp.close()">✕</span>
-  <h1>Rain Star</h1>
-  <span class="header-icon" style="font-size:18px">⋮</span>
-</header>
+<div class="header">
+    <h1>Rain Star ✨</h1>
+    <div class="header-icon" onclick="showPage('settings')">⚙️</div>
+</div>
 
 <div class="container">
-
-<!-- HOME -->
-<div id="page-home" class="page active">
-  
-<div class="gift3d-card">
-  <div class="gift3d-streak">🔥 سلسلة: <span id="gift3d-streak-num">0</span> يوم</div>
-  <div class="gift3d-title">🎁 الهدية اليومية</div>
-  <div class="gift3d-sub">افتح صندوقك السحري كل 24 ساعة</div>
-  <div class="gift3d-stage" id="gift3d-stage">
-    <div class="gift3d-glow"></div>
-    <div class="gift3d-box" id="gift3d-box" onclick="openDailyGift()">
-      <div class="gift3d-face front"></div>
-      <div class="gift3d-face back"></div>
-      <div class="gift3d-face right"></div>
-      <div class="gift3d-face left"></div>
-      <div class="gift3d-face top"></div>
-      <div class="gift3d-face bottom"></div>
-      <div class="gift3d-ribbon-v"></div>
-      <div class="gift3d-ribbon-h"></div>
-      <div class="gift3d-bow">🎀</div>
-    </div>
-    <div class="gift3d-reward" id="gift3d-reward"></div>
-  </div>
-  <button class="gift3d-btn" id="gift3d-btn" onclick="openDailyGift()">✨ افتح الهدية</button>
-</div>
-
-<div class="balance-card">
-    <div class="balance-label">رصيدك الحالي</div>
-    <div class="balance-amount" id="home-balance">0 ⭐</div>
-    <div class="balance-stars" id="home-points">= 0 نقطة</div>
-  </div>
-
-  <div class="quick-actions">
-    <div class="action-btn" onclick="showPage('tasks')">
-      <div class="action-btn-icon">📋</div><div class="action-btn-title">Tasks</div><div class="action-btn-desc">أكمل المهام</div>
-    </div>
-    <div class="action-btn" onclick="showPage('ads')">
-      <div class="action-btn-icon">▶️</div><div class="action-btn-title">Watch Ads</div><div class="action-btn-desc">اربح نقاط</div>
-    </div>
-    <div class="action-btn" onclick="showPage('invite')">
-      <div class="action-btn-icon">👥</div><div class="action-btn-title">Invite</div><div class="action-btn-desc">اكسب أكثر</div>
-    </div>
-    <div class="action-btn" onclick="showPage('withdraw')">
-      <div class="action-btn-icon">💰</div><div class="action-btn-title">Withdraw</div><div class="action-btn-desc">اسحب أرباحك</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="stats-row">
-      <div class="stat-item"><div style="font-size:24px">📋</div><div class="stat-value" id="home-tasks">0</div><div class="stat-label">From Tasks</div></div>
-      <div class="stat-item"><div style="font-size:24px">👥</div><div class="stat-value" id="home-referrals">0</div><div class="stat-label">From Referrals</div></div>
-    </div>
-    <div class="stats-row" style="border:none;padding-top:10px">
-      <div class="stat-item"><div style="font-size:24px">💸</div><div class="stat-value" id="home-withdrawn">0</div><div class="stat-label">Total Withdrawn</div></div>
-    </div>
-  </div>
-
-  <div class="rules-card">
-    <div class="rules-title">ℹ️ Withdrawal Rules</div>
-    <ul class="rules-list">
-      <li>• Payment Method: <strong>Binance Pay</strong></li>
-      <li>• Minimum: <strong style="color:#d97706">30,000 ⭐</strong></li>
-      <li>• 300,000 ⭐ = 1 USDT</li>
-      <li>• Processing time: 24-48 hours</li>
-    </ul>
-  </div>
-
-  <div class="promo-banner">
-    <div class="promo-text">🚀 Last Chance. Join Now 🎁</div>
-    <button class="promo-btn" onclick="showPage('ads')">go</button>
-  </div>
-
-  <div class="card">
-    <div class="settings-list">
-      <div class="setting-item"><div class="setting-left"><div class="setting-icon">🎧</div><div class="setting-name">Support</div></div><span>Contact →</span></div>
-    </div>
-    <div class="footer">Rain Star v2.0.0<br>Made with ⭐ for Telegram</div>
-  </div>
-</div>
-
-<!-- TASKS -->
-<div id="page-tasks" class="page">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-    <button onclick="showPage('home')" style="width:40px;height:40px;border-radius:12px;background:var(--card);border:1px solid var(--border);font-size:18px;cursor:pointer">→</button>
-    <h2 style="font-size:18px;font-weight:800">Tasks</h2>
-  </div>
-  <div id="tasks-list"></div>
-</div>
-
-<!-- ADS -->
-<div id="page-ads" class="page">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-    <button onclick="showPage('home')" style="width:40px;height:40px;border-radius:12px;background:var(--card);border:1px solid var(--border);font-size:18px;cursor:pointer">→</button>
-    <h2 style="font-size:18px;font-weight:800">Watch & Earn</h2>
-  </div>
-
-  <div class="ad-section">
-    <div class="ad-header">
-      <h2>📺 شاهد الإعلان واربح</h2>
-      <p>كل مشاهدة = 25-75 ⭐ عشوائية!</p>
+    <!-- Balance Card -->
+    <div class="balance-card">
+        <div class="balance-label">رصيدك الحالي</div>
+        <div class="balance-amount" id="user-pts">0</div>
+        <div class="balance-stars" id="user-stars">0.00 نجمة</div>
     </div>
 
-    <!-- منطقة الإعلان -->
-    <div class="ad-container" id="ad-container">
-      <div class="ad-loading" id="ad-loading">
-        <div class="spinner"></div>
-        <p style="color:var(--muted)">جاري تحميل الإعلان...</p>
-      </div>
-      
-      <!-- هنا سيظهر الإعلان بعد التحميل -->
-      <iframe id="ad-frame" style="display:none;width:100%;height:220px;border:none;border-radius:var(--radius)"></iframe>
-      
-      <div id="ad-complete" class="ad-complete" style="display:none">
-        <div class="check-icon">✅</div>
-        <div class="points" id="ad-points-got">+0</div>
-        <div class="msg">تمت إضافة النجوم!</div>
-      </div>
-    </div>
-
-    <!-- المؤقت -->
-    <div class="ad-timer" id="ad-timer">
-      <div class="timer-text">⏱️ انتظر حتى ينتهي المؤقت...</div>
-      <div class="timer-bar"><div class="timer-fill" id="ad-timer-fill"></div></div>
-    </div>
-
-    <button class="submit-btn" id="watch-ad-btn" onclick="startWatchingAd()">▶️ شاهد الآن واربح</button>
-  </div>
-
-  <!-- إحصائيات اليوم -->
-  <div class="card">
-    <h3 style="font-size:16px;font-weight:700;margin-bottom:12px">📊 أرباحك اليوم</h3>
-    <div style="display:flex;justify-content:space-around;text-align:center">
-      <div><div style="font-size:24px;font-weight:800;color:var(--gold)" id="ads-watched-today">0</div><div style="font-size:11px;color:var(--muted)">مشاهدات</div></div>
-      <div><div style="font-size:24px;font-weight:800;color:var(--green)" id="ads-earned-today">0</div><div style="font-size:11px;color:var(--muted)">نقطة</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- INVITE -->
-<div id="page-invite" class="page">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-    <button onclick="showPage('home')" style="width:40px;height:40px;border-radius:12px;background:var(--card);border:1px solid var(--border);font-size:18px;cursor:pointer">→</button>
-    <h2 style="font-size:18px;font-weight:800">Invite Friends</h2>
-  </div>
-
-  <div class="invite-card">
-    <div style="font-size:14px;color:#6d28d9;margin-bottom:8px">كود دعوتك الفريد:</div>
-    <div class="invite-code" id="invite-code">XXXXXX</div>
-    <div class="invite-link" id="invite-link">https://t.me/bot?start=XXXXXX</div>
-    <button class="copy-btn" onclick="copyInviteLink()">📋 نسخ الرابط</button>
-    <div class="ref-stats">
-      <div class="ref-stat"><div class="ref-stat-val" id="total-referrals">0</div><div class="ref-stat-label">دعوات</div></div>
-      <div class="ref-stat"><div class="ref-stat-val" id="ref-earnings">0</div><div class="ref-stat-label">أرباحك</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- WITHDRAW -->
-<div id="page-withdraw" class="page">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-    <button onclick="showPage('home')" style="width:40px;height:40px;border-radius:12px;background:var(--card);border:1px solid var(--border);font-size:18px;cursor:pointer">→</button>
-    <h2 style="font-size:18px;font-weight:800">Withdraw</h2>
-  </div>
-
-  <div class="balance-card" style="background:linear-gradient(135deg,#f59e0b,#d97706)">
-    <div class="balance-label">رصيدك القابل للسحب</div>
-    <div class="balance-amount" id="wd-balance">0 ⭐</div>
-    <div class="balance-stars" id="wd-equivalent">≈ 0 USDT</div>
-  </div>
-
-  <div class="withdraw-form">
-    <div class="form-group">
-      <label class="form-label">اختر طريقة السحب</label>
-      <div id="methods-list">
-        <div class="method-option selected" onclick="selectMethod(this,'binance')">
-          <div class="method-icon" style="background:#f59e0b">💰</div>
-          <div><div style="font-weight:600">Binance Pay</div><div style="font-size:11px;color:var(--muted)">الأسرع</div></div>
+    <!-- 3D Daily Gift -->
+    <div class="gift3d-container">
+        <h2 class="gift3d-title">الهدية اليومية</h2>
+        <p class="gift3d-subtitle">افتح الصندوق واحصل على مكافأتك العشوائية!</p>
+        
+        <div class="gift3d-scene" onclick="claimDailyGift()">
+            <div class="gift3d-box" id="gift-box">
+                <div class="gift-face face-front"></div>
+                <div class="gift-face face-back"></div>
+                <div class="gift-face face-right"></div>
+                <div class="gift-face face-left"></div>
+                <div class="gift-face face-top"></div>
+                <div class="gift-face face-bottom"></div>
+            </div>
         </div>
-        <div class="method-option" onclick="selectMethod(this,'usdt')">
-          <div class="method-icon" style="background:#26a17a">💵</div>
-          <div><div style="font-weight:600">USDT TRC20</div><div style="font-size:11px;color:var(--muted)">رسوم منخفضة</div></div>
-        </div>
-        <div class="method-option" onclick="selectMethod(this,'bank')">
-          <div class="method-icon" style="background:#3b82f6">🏦</div>
-          <div><div style="font-weight:600">تحويل بنكي</div><div style="font-size:11px;color:var(--muted)">للمغرب العرب</div></div>
-        </div>
-      </div>
-      <input type="hidden" id="wd-method" value="binance">
+
+        <button class="claim-btn" id="claim-btn" onclick="claimDailyGift()">افتح الهدية الآن</button>
+        <p id="gift-timer" style="margin-top:15px; font-size:14px; color:var(--gold); display:none;"></p>
     </div>
 
-    <div class="form-group">
-      <label class="form-label">المبلغ (⭐)</label>
-      <input type="number" class="form-input" id="wd-amount" placeholder="الحد الأدنى: 30,000" min="30000">
+    <!-- Additional Content Placeholder -->
+    <div id="home-content">
+        <!-- Add more cards here -->
     </div>
-
-    <div class="form-group">
-      <label class="form-label">محفظة / عنوان المحفظة</label>
-      <input type="text" class="form-input" id="wd-wallet" placeholder="Txxxxx... أو رقم الحساب">
-    </div>
-
-    <button class="submit-btn" id="wd-submit" onclick="submitWithdraw()">💸 طلب السحب</button>
-  </div>
-
-  <div class="history-list">
-    <h3 style="font-size:15px;font-weight:700;margin-bottom:12px">📋 سجل السحب</h3>
-    <div class="history-empty" id="wd-history-empty">لا توجد عمليات سحب بعد</div>
-    <div id="wd-history-list"></div>
-  </div>
 </div>
 
+<div class="bottom-nav">
+    <a href="#" class="nav-item active" onclick="showPage('home')">
+        <span class="nav-icon">🏠</span>
+        <span>الرئيسية</span>
+    </a>
+    <a href="#" class="nav-item" onclick="showPage('tasks')">
+        <span class="nav-icon">📋</span>
+        <span>المهام</span>
+    </a>
+    <a href="#" class="nav-item" onclick="showPage('ads')">
+        <span class="nav-icon">📺</span>
+        <span>إعلانات</span>
+    </a>
+    <a href="#" class="nav-item" onclick="showPage('invite')">
+        <span class="nav-icon">👥</span>
+        <span>الأصدقاء</span>
+    </a>
+    <a href="#" class="nav-item" onclick="showPage('withdraw')">
+        <span class="nav-icon">💰</span>
+        <span>سحب</span>
+    </a>
 </div>
-
-<!-- Bottom Nav -->
-<nav class="bottom-nav">
-  <a href="#" class="nav-item active" onclick="showPage('home');return false"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></a>
-  <a href="#" class="nav-item" onclick="showPage('tasks');return false"><span class="nav-icon">📋</span><span class="nav-label">Tasks</span></a>
-  <a href="#" class="nav-item" onclick="showPage('ads');return false"><span class="nav-icon" style="color:var(--gold)">🎮</span><span class="nav-label" style="color:var(--gold)">Earn</span></a>
-  <a href="#" class="nav-item" onclick="showPage('invite');return false"><span class="nav-icon">👥</span><span class="nav-label">Invite</span></a>
-  <a href="#" class="nav-item" onclick="showPage('withdraw');return false"><span class="nav-icon">🏆</span><span class="nav-label">Rank</span></a>
-</nav>
 
 <!-- Toast -->
-<div class="toast" id="toast"><span id="toast-msg">تم!</span></div>
+<div id="toast" class="toast"></div>
 
-<!-- Modal -->
-<div class="modal-overlay" id="modal">
-  <div class="modal-box">
-    <div class="modal-icon" id="modal-icon">💸</div>
-    <div class="modal-title" id="modal-title">تأكيد السحب</div>
-    <div class="modal-text" id="modal-text">هل تؤكد؟</div>
-    <button class="modal-btn modal-btn-primary" id="modal-ok">تأكيد</button>
-    <button class="modal-btn modal-btn-secondary" onclick="closeModal()">إلغاء</button>
-  </div>
+<!-- Reward Modal -->
+<div id="modal-overlay" class="modal-overlay">
+    <div class="modal-box">
+        <div class="reward-glow">🎁</div>
+        <h2 id="modal-title">مبروك!</h2>
+        <p id="modal-text" style="margin: 15px 0; color: var(--muted); line-height: 1.6;"></p>
+        <button class="claim-btn" onclick="closeModal()">رائع!</button>
+    </div>
 </div>
 
 <script>
-// === STATE ===
-let user={id:null,name:'',pts:0,stars:0,tasks:0,referrals:0,withdrawn:0,refCode:'',adsWatched:0,earnedToday:0};
-let selectedMethod='binance';
-const API=window.location.origin+'/api';
+const tg = window.Telegram.WebApp;
+tg.expand();
+const userId = tg.initDataUnsafe?.user?.id || '123456';
+const userName = tg.initDataUnsafe?.user?.first_name || 'User';
 
-
-// === DAILY GIFT 3D ===
-let giftOpening=false;
-async function openDailyGift(){
-  if(giftOpening)return;
-  const btn=document.getElementById('gift3d-btn');
-  const box=document.getElementById('gift3d-box');
-  const reward=document.getElementById('gift3d-reward');
-  if(btn.disabled)return;
-  giftOpening=true;btn.disabled=true;
-  try{
-    const r=await fetch(`${API}/daily-gift/${user.id}`,{method:'POST'});
-    const d=await r.json();
-    if(!d.success){
-      showToast(d.error||'غير متاح',true);
-      btn.disabled=false;giftOpening=false;
-      if(d.remainingMs)startGiftCooldown(d.remainingMs);
-      return;
+async function initApp() {
+    try {
+        const res = await fetch(`/api/user/${userId}`);
+        const data = await res.json();
+        if(data.success) {
+            updateUI(data.user);
+            checkGiftStatus(data.user.lastDailyGift);
+        }
+    } catch(e) {
+        showToast('فشل الاتصال بالسيرفر', true);
     }
-    box.classList.add('opened');spawnConfetti();
-    reward.innerHTML=`+${d.reward} ⭐<span class="gift3d-tier tier-${d.tier}">${tierLabel(d.tier)}</span>`;
-    reward.classList.add('show');
-    user.pts=d.totalPts;user.stars=d.totalStars;
-    document.getElementById('gift3d-streak-num').textContent=d.streak;
-    updateUI();log('success','Gift +'+d.reward);
-    setTimeout(()=>{resetGift();startGiftCooldown(24*60*60*1000);},4000);
-  }catch(e){showToast('خطأ',true);btn.disabled=false;giftOpening=false;}
-}
-function tierLabel(t){return {common:'عادي',uncommon:'غير عادي',rare:'نادر',epic:'ملحمي',legendary:'أسطوري 🌟'}[t]||t;}
-function resetGift(){
-  document.getElementById('gift3d-box').classList.remove('opened');
-  const r=document.getElementById('gift3d-reward');r.classList.remove('show');r.textContent='';
-  giftOpening=false;
-}
-function startGiftCooldown(ms){
-  const btn=document.getElementById('gift3d-btn');btn.disabled=true;
-  const tick=()=>{ms-=1000;if(ms<=0){btn.disabled=false;btn.textContent='✨ افتح الهدية';return;}
-    const h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000),s=Math.floor((ms%60000)/1000);
-    btn.textContent=`⏳ ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-    setTimeout(tick,1000);};tick();
-}
-function spawnConfetti(){
-  const stage=document.getElementById('gift3d-stage');
-  const colors=['#fbbf24','#ef4444','#10b981','#3b82f6','#a855f7','#ec4899'];
-  for(let i=0;i<30;i++){
-    const c=document.createElement('div');c.className='gift3d-confetti go';
-    c.style.background=colors[i%colors.length];c.style.left='50%';c.style.top='50%';
-    c.style.setProperty('--tx',(Math.random()*400-200)+'px');
-    c.style.setProperty('--ty',(Math.random()*-300-50)+'px');
-    c.style.borderRadius=Math.random()>.5?'50%':'2px';
-    stage.appendChild(c);setTimeout(()=>c.remove(),1700);
-  }
 }
 
-// === INIT ===
-document.addEventListener('DOMContentLoaded',()=>{
-  initTG();loadUser();renderTasks();updateUI();log('info','✨ Rain Star loaded');
-});
+function updateUI(user) {
+    document.getElementById('user-pts').innerText = user.pts.toLocaleString();
+    document.getElementById('user-stars').innerText = `${user.stars.toLocaleString()} نجمة`;
+}
 
-function initTG(){
-  if(window.Telegram?.WebApp){
-    const tg=window.Telegram.WebApp;tg.ready();tg.expand();
-    if(tg.initDataUnsafe?.user){
-      user.id=String(tg.initDataUnsafe.user.id);
-      user.name=tg.initDataUnsafe.user.first_name||'User';
-      document.querySelector('.header h1').textContent=`Hello, ${user.name}`;
-      tg.BackButton.onClick(()=>showPage('home'));
+function checkGiftStatus(lastGiftTime) {
+    if (!lastGiftTime) return;
+    const now = Date.now();
+    const last = new Date(lastGiftTime).getTime();
+    const ONE_DAY = 24 * 60 * 60 * 1000;
+    
+    if (now - last < ONE_DAY) {
+        const remaining = ONE_DAY - (now - last);
+        startTimer(remaining);
+        disableGift();
     }
-  }else user.id='demo_'+Math.random().toString(36).substr(2,9);
 }
 
-async function loadUser(){
-  try{
-    const r=await fetch(`${API}/user/${user.id}`);const d=await r.json();
-    if(d.success){user={...user,...d.user};updateUI();if(d.user.lastDailyGift){const rem=24*60*60*1000-(Date.now()-d.user.lastDailyGift);if(rem>0)startGiftCooldown(rem);}document.getElementById('gift3d-streak-num').textContent=d.user.dailyStreak||0;}
-  }catch(e){console.log(e);}
+function disableGift() {
+    const btn = document.getElementById('claim-btn');
+    btn.disabled = true;
+    btn.innerText = 'تم الاستلام';
+    document.getElementById('gift-box').style.animation = 'none';
+    document.getElementById('gift-box').style.opacity = '0.5';
 }
 
-function saveUser(){fetch(`${API}/user/${user.id}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:user.name})}).catch(()=>{});}
-
-// === NAVIGATION ===
-function showPage(p){
-  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
-  document.getElementById('page-'+p).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
-  event.target.closest('.nav-item')?.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+function startTimer(ms) {
+    const timerEl = document.getElementById('gift-timer');
+    timerEl.style.display = 'block';
+    
+    const update = () => {
+        if (ms <= 0) {
+            location.reload();
+            return;
+        }
+        const h = Math.floor(ms / 3600000);
+        const m = Math.floor((ms % 3600000) / 60000);
+        const s = Math.floor((ms % 60000) / 1000);
+        timerEl.innerText = `الهدية القادمة خلال: ${h}س ${m}د ${s}ث`;
+        ms -= 1000;
+        setTimeout(update, 1000);
+    };
+    update();
 }
 
-// === UPDATE UI ===
-function updateUI(){
-  document.getElementById('home-balance').textContent=user.stars+' ⭐';
-  document.getElementById('home-points').textContent='= '+user.pts.toLocaleString()+" نقطة";
-  document.getElementById('home-tasks').textContent=user.tasks;
-  document.getElementById('home-referrals').textContent=user.referrals;
-  document.getElementById('home-withdrawn').textContent=user.withdrawn;
-  document.getElementById('wd-balance').textContent=user.stars+' ⭐';
-  document.getElementById('wd-equivalent').textContent='≈ '+(user.stars/30000).toFixed(2)+' USDT';
-  document.getElementById('invite-code').textContent=user.refCode||'XXXXXX';
-  document.getElementById('invite-link').textContent=`https://t.me/YOUR_BOT?start=${user.refCode||'XXXXX'}`;
-  document.getElementById('total-referrals').textContent=user.referrals;
-  document.getElementById('ref-earnings').textContent=(user.referrals*500).toLocaleString();
-  document.getElementById('ads-watched-today').textContent=user.adsWatched||0;
-  document.getElementById('ads-earned-today').textContent=user.earnedToday||0;
-  renderWithdrawHistory();
-}
-
-// === TASKS ===
-function renderTasks(){
-  const tasks=[
-    {id:1,title:'تابع قناة تلغرام',icon:'📺',reward:100},
-    {id:2,title:'انضم لمجموعة',icon:'👥',reward:150},
-    {id:3,title:'شارك المنشور',icon:'📤',reward:200},
-    {id:4,title:'سجل في التطبيق',icon:'✅',reward:80}
-  ];
-  const c=document.getElementById('tasks-list');c.innerHTML='';
-  tasks.forEach(t=>{
-    c.innerHTML+=`<div class="task-card"><div class="task-icon">${t.icon}</div><div class="task-info"><div class="task-title">${t.title}</div><div class="task-reward">+${t.reward} ⭐</div></div><button class="task-btn" onclick="completeTask(${t.id},${t.reward})">ابدأ</button></div>`;
-  });
-}
-
-async function completeTask(id,reward){
-  try{
-    const r=await fetch(`${API}/complete-task/${user.id}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({taskId:id,reward})});
-    const d=await r.json();
-    if(d.success){user.pts=d.totalPts;user.stars=Math.floor(user.pts/1000);user.tasks++;saveUser();updateUI();showToast(`+${reward} ⭐!`,'');log('success','Task done!')}
-    else showToast(d.error,true);
-  }catch(e){showToast('Error!',true);}
-}
-
-// === ADS SYSTEM (WORKING!) ===
-let adTimer=null;
-
-async function startWatchingAd(){
-  const btn=document.getElementById('watch-ad-btn');
-  if(btn.disabled)return;
-  btn.disabled=true;
-  
-  const container=document.getElementById('ad-container');
-  const loading=document.getElementById('ad-loading');
-  const frame=document.getElementById('ad-frame');
-  const complete=document.getElementById('ad-complete');
-  const timerDiv=document.getElementById('ad-timer');
-  
-  // 1. Show loading
-  container.innerHTML='';
-  container.appendChild(loading);
-  loading.style.display='block';
-  frame.style.display='none';
-  complete.style.display='none';
-  timerDiv.style.display='none';
-  
-  log('info','Loading ad...');
-  
-  // 2. Simulate loading ad (replace with real ad code here)
-  setTimeout(()=>{
-    loading.style.display='none';
+async function claimDailyGift() {
+    const btn = document.getElementById('claim-btn');
+    if(btn.disabled) return;
     
-    // OPTION A: Show real Adsterra ad (uncomment and add your code)
-    /*
-    frame.style.display='block';
-    frame.src='https://www.adsterra.com/...');
-    */
+    btn.disabled = true;
+    const box = document.getElementById('gift-box');
+    box.classList.add('opening');
     
-    // OPTION B: Placeholder ad (for now)
-    container.innerHTML=`
-      <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:12px;padding:20px;width:100%">
-        <div style="font-size:11px;color:#92400e;margin-bottom:8px;text-align:center">📢 إعلان ممول</div>
-        <div style="font-size:18px;font-weight:700;text-align:center;margin-bottom:8px">🎁 عرض خاص لك!</div>
-        <div style="font-size:13px;color:#78350f;text-align:center;line-height:1.5">
-          هذا إعلان تجريبي.<br>في النسخة الحقيقية سيظهر<br>إعلان Adsterra أو أي شبكة أخرى.
-        </div>
-        <div style="text-align:center;margin-top:12px;padding:10px;background:rgba(255,255,255,.3);border-radius:8px;font-size:11px">
-          ⏱️ يرجى الانتظار...
-        </div>
-      </div>
-    `;
-    
-    // 3. Start timer
-    timerDiv.style.display='block';
-    let time=15;
-    const fill=document.getElementById('ad-timer-fill');
-    
-    log('info','Timer started: 15s');
-    
-    adTimer=setInterval(()=>{
-      time--;
-      fill.style.width=(time/15*100)+'%';
-      
-      if(time<=5){
-        timerDiv.querySelector('.timer-text').textContent='⏱️ تقريباً '+time+' ثواني!';
-        timerDiv.querySelector('.timer-text').style.color='#ef4444';
-      }
-      
-      if(time<=0){
-        clearInterval(adTimer);
-        finishAdWatch();
-      }
-    },1000);
-    
-  },1500);
-}
-
-async function finishAdWatch(){
-  const btn=document.getElementById('watch-ad-btn');
-  const timerDiv=document.getElementById('ad-timer');
-  const container=document.getElementById('ad-container');
-  const complete=document.getElementById('ad-complete');
-  const pointsEl=document.getElementById('ad-points-got');
-  
-  btn.disabled=false;
-  timerDiv.style.display='none';
-  
-  // Call API
-  try{
-    const r=await fetch(`${API}/watch-ad/${user.id}`,{method:'POST'});
-    const d=await r.json();
-    
-    if(d.success){
-      user.pts=d.totalPts;
-      user.stars=Math.floor(d.totalPts/1000);
-      user.adsWatched=(user.adsWatched||0)+1;
-      user.earnedToday=(user.earnedToday||0)+d.points;
-      saveUser();updateUI();
-      
-      // Show success
-      container.innerHTML='';
-      container.appendChild(complete);
-      complete.style.display='block';
-      pointsEl.textContent='+'+d.points;
-      
-      showToast(`+${d.points} ⭐`,'');
-      log('success','Ad completed! +'+d.points);
-      
-      // Reset after 3 seconds
-      setTimeout(()=>{resetAdContainer();},3000);
-    }else{
-      if(d.error.includes('انتظر')){
-        showToast(d.error,true);
-        resetAdContainer();
-      }else{
-        showToast(d.error||'Error',true);
-        resetAdContainer();
-      }
+    try {
+        const res = await fetch(`/api/daily-gift/${userId}`, { method: 'POST' });
+        const data = await res.json();
+        
+        if(data.success) {
+            setTimeout(() => {
+                showModal('هدية يومية!', `لقد حصلت على ${data.reward} نقطة! 🎉\nفئة الهدية: ${data.tier}\nمتتالية الأيام: ${data.streak}`);
+                initApp();
+            }, 1000);
+        } else {
+            box.classList.remove('opening');
+            showToast(data.error, true);
+            btn.disabled = false;
+        }
+    } catch(e) {
+        box.classList.remove('opening');
+        showToast('حدث خطأ ما', true);
+        btn.disabled = false;
     }
-  }catch(e){
-    showToast('Connection error',true);
-    log('error','Ad error: '+e.message);
-    resetAdContainer();
-  }
 }
 
-function resetAdContainer(){
-  const container=document.getElementById('ad-container');
-  container.innerHTML=`
-    <div style="text-align:center;padding:20px;color:var(--muted)">
-      <div style="font-size:40px;margin-bottom:8px">▶️</div>
-      <p>اضغط "شاهد الآن"</p>
-      <p style="font-size:11px;margin-top:4px">كل مشاهدة = 25-75 ⭐</p>
-    </div>`;
-  document.getElementById('watch-ad-btn').disabled=false;
+function showToast(msg, isError = false) {
+    const toast = document.getElementById('toast');
+    toast.innerText = msg;
+    toast.className = `toast show ${isError ? 'error' : ''}`;
+    setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
-// === INVITE ===
-function copyInviteLink(){
-  navigator.clipboard.writeText(document.getElementById('invite-link').textContent).then(()=>{
-    showToast('تم نسخ الرابط!','');log('info','Link copied');
-  }).catch(()=>{});
+function showModal(title, text) {
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-text').innerText = text;
+    document.getElementById('modal-overlay').classList.add('show');
 }
 
-// === WITHDRAW ===
-function selectMethod(el,method){
-  document.querySelectorAll('.method-option').forEach(o=>o.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedMethod=method;
-  document.getElementById('wd-method').value=method;
+function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('show');
 }
 
-async function submitWithdraw(){
-  const amount=parseInt(document.getElementById('wd-amount').value);
-  const wallet=document.getElementById('wd-wallet').value;
-  
-  if(!amount||amount<30000){showToast('الحد الأدنى 30,000 ⭐',true);return;}
-  if(!wallet){showToast('أدخل المحفظة',true);return;}
-  if(user.stars<amount){showToast('رصيد غير كافٍ',true);return;}
-  
-  // Show confirmation modal
-  showModal('💸','تأكيد السحب',`هل تؤكد سحب ${amount.toLocaleString()} ⭐؟\nإلى محفظة: ${wallet}`,async()=>{
-    try{
-      const r=await fetch(`${API}/withdraw/${user.id}`,{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({amount,method:selectedMethod,wallet})
-      });
-      const d=await r.json();
-      if(d.success){
-        user.stars=d.newStars;
-        user.withdrawn+=amount;
-        saveUser();updateUI();
-        closeModal();
-        showToast(`تم إرسال الطلب! 💸`,'');
-        log('success','Withdraw submitted!');
-        document.getElementById('wd-amount').value='';
-        document.getElementById('wd-wallet').value='';
-      }else{showToast(d.error,true);closeModal();}
-    }catch(e){showToast('خطأ في الاتصال',true);closeModal();}
-  });
-}
-
-async function renderWithdrawHistory(){
-  try{
-    const r=await fetch(`${API}/withdraws/${user.id}`);
-    const d=await r.json();
-    const list=document.getElementById('wd-history-list');
-    const empty=document.getElementById('wd-history-empty');
-    
-    if(!d.withdrawals||!d.withdraws.length){
-      empty.style.display='block';list.innerHTML='';return;
-    }
-    
-    empty.style.display='none';list.innerHTML='';
-    d.withdraws.forEach(w=>{
-      list.innerHTML+=`
-        <div class="history-item">
-          <div class="history-left">
-            <div class="history-icon">💰</div>
-            <div><div class="history-amount">${w.amount.toLocaleString()} ⭐</div><div class="history-date">${new Date(w.createdAt).toLocaleDateString()}</div></div>
-          </div>
-          <span class="history-status status-${w.status==='approved'?'approved':w.status==='rejected'?'rejected':'pending'}">${w.status==='approved'?'مقبول':w.status==='rejected'?'مرفوض':'قيد المراجعة'}</span>
-        </div>`;
-    });
-  }catch(e){}
-}
-
-// === TOAST ===
-function showToast(msg,err=false){
-  const t=document.getElementById('toast');
-  t.className='toast show'+(err?' error':'');
-  t.querySelector('#toast-msg').textContent=msg;
-  setTimeout(()=>t.classList.remove('show'),3500);
-}
-
-// === MODAL ===
-function showModal(icon,title,text,cb){
-  document.getElementById('modal-icon').textContent=icon;
-  document.getElementById('modal-title').textContent=title;
-  document.getElementById('modal-text').innerHTML=text;
-  document.getElementById('modal-ok').onclick=cb;
-  document.getElementById('modal').classList.add('show');
-}
-function closeModal(){document.getElementById('modal').classList.remove('show');}
-
-// === LOG ===
-function log(type,msg){console.log('['+type.toUpperCase()+'] '+msg);}
+initApp();
 </script>
 </body>
 </html>
