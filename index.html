@@ -116,6 +116,43 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .modal-btn-primary{background:linear-gradient(135deg,var(--gold),#d97706);color:#111}
 .modal-btn-secondary{background:var(--card);color:var(--text)}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* === 3D Daily Gift === */
+.gift3d-card{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:20px;padding:24px 16px;text-align:center;margin-bottom:14px;position:relative;overflow:hidden;border:1px solid rgba(245,158,11,.3)}
+.gift3d-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(245,158,11,.25),transparent 60%);pointer-events:none}
+.gift3d-title{color:#fbbf24;font-weight:800;font-size:18px;margin-bottom:4px;position:relative}
+.gift3d-sub{color:#cbd5e1;font-size:12px;margin-bottom:18px;position:relative}
+.gift3d-stage{perspective:900px;height:200px;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:16px}
+.gift3d-box{width:130px;height:130px;position:relative;transform-style:preserve-3d;transform:rotateX(-18deg) rotateY(-25deg);animation:gFloat 3s ease-in-out infinite;cursor:pointer}
+.gift3d-face{position:absolute;width:130px;height:130px;background:linear-gradient(135deg,#ef4444,#b91c1c);border:2px solid #fbbf24;box-shadow:inset 0 0 30px rgba(0,0,0,.3)}
+.gift3d-face.front{transform:translateZ(65px)}
+.gift3d-face.back{transform:translateZ(-65px) rotateY(180deg)}
+.gift3d-face.right{transform:rotateY(90deg) translateZ(65px)}
+.gift3d-face.left{transform:rotateY(-90deg) translateZ(65px)}
+.gift3d-face.top{transform:rotateX(90deg) translateZ(65px);background:linear-gradient(135deg,#dc2626,#7f1d1d);transition:transform .8s cubic-bezier(.5,-.5,.3,1.5)}
+.gift3d-face.bottom{transform:rotateX(-90deg) translateZ(65px)}
+.gift3d-box.opened .gift3d-face.top{transform:rotateX(90deg) translateZ(65px) translateY(-90px) rotateZ(25deg)}
+.gift3d-ribbon-v{position:absolute;width:22px;height:130px;left:54px;background:linear-gradient(90deg,#fbbf24,#f59e0b,#fbbf24);box-shadow:0 0 10px rgba(251,191,36,.6)}
+.gift3d-ribbon-h{position:absolute;height:22px;width:130px;top:54px;background:linear-gradient(180deg,#fbbf24,#f59e0b,#fbbf24);box-shadow:0 0 10px rgba(251,191,36,.6)}
+.gift3d-bow{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:36px;filter:drop-shadow(0 0 8px rgba(251,191,36,.8))}
+.gift3d-glow{position:absolute;inset:-40px;background:radial-gradient(circle,rgba(251,191,36,.4),transparent 70%);animation:gPulse 2s ease-in-out infinite;pointer-events:none}
+@keyframes gFloat{0%,100%{transform:rotateX(-18deg) rotateY(-25deg) translateY(0)}50%{transform:rotateX(-18deg) rotateY(-25deg) translateY(-10px)}}
+@keyframes gPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+.gift3d-box.opened{animation:gOpen 1.2s ease forwards}
+@keyframes gOpen{0%{transform:rotateX(-18deg) rotateY(-25deg) scale(1)}40%{transform:rotateX(-18deg) rotateY(-25deg) scale(1.15)}100%{transform:rotateX(-18deg) rotateY(385deg) scale(.6);opacity:0}}
+.gift3d-reward{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);opacity:0;font-size:38px;font-weight:900;color:#fbbf24;text-shadow:0 0 20px #fbbf24,0 0 40px #f59e0b;text-align:center}
+.gift3d-reward.show{animation:gReward 1.4s .8s ease forwards}
+@keyframes gReward{0%{transform:translate(-50%,-50%) scale(0) rotate(-180deg);opacity:0}60%{transform:translate(-50%,-50%) scale(1.3) rotate(10deg);opacity:1}100%{transform:translate(-50%,-50%) scale(1) rotate(0);opacity:1}}
+.gift3d-tier{font-size:13px;margin-top:6px;font-weight:700;display:block}
+.gift3d-btn{background:linear-gradient(135deg,#fbbf24,#d97706);color:#1a1a2e;border:none;padding:14px 36px;border-radius:999px;font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 6px 20px rgba(251,191,36,.4);transition:.2s}
+.gift3d-btn:active{transform:scale(.96)}
+.gift3d-btn:disabled{opacity:.5;cursor:not-allowed;background:#475569;color:#cbd5e1;box-shadow:none}
+.gift3d-streak{display:inline-flex;align-items:center;gap:6px;background:rgba(251,191,36,.15);color:#fbbf24;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:12px;border:1px solid rgba(251,191,36,.3)}
+.gift3d-confetti{position:absolute;width:8px;height:8px;pointer-events:none;opacity:0}
+.gift3d-confetti.go{animation:gConfetti 1.6s ease-out forwards}
+@keyframes gConfetti{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--tx),var(--ty)) rotate(720deg)}}
+.tier-common{color:#94a3b8}.tier-uncommon{color:#10b981}.tier-rare{color:#3b82f6}.tier-epic{color:#a855f7}.tier-legendary{color:#fbbf24;text-shadow:0 0 10px #fbbf24}
+
 </style>
 </head>
 <body>
@@ -130,7 +167,30 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 
 <!-- HOME -->
 <div id="page-home" class="page active">
-  <div class="balance-card">
+  
+<div class="gift3d-card">
+  <div class="gift3d-streak">🔥 سلسلة: <span id="gift3d-streak-num">0</span> يوم</div>
+  <div class="gift3d-title">🎁 الهدية اليومية</div>
+  <div class="gift3d-sub">افتح صندوقك السحري كل 24 ساعة</div>
+  <div class="gift3d-stage" id="gift3d-stage">
+    <div class="gift3d-glow"></div>
+    <div class="gift3d-box" id="gift3d-box" onclick="openDailyGift()">
+      <div class="gift3d-face front"></div>
+      <div class="gift3d-face back"></div>
+      <div class="gift3d-face right"></div>
+      <div class="gift3d-face left"></div>
+      <div class="gift3d-face top"></div>
+      <div class="gift3d-face bottom"></div>
+      <div class="gift3d-ribbon-v"></div>
+      <div class="gift3d-ribbon-h"></div>
+      <div class="gift3d-bow">🎀</div>
+    </div>
+    <div class="gift3d-reward" id="gift3d-reward"></div>
+  </div>
+  <button class="gift3d-btn" id="gift3d-btn" onclick="openDailyGift()">✨ افتح الهدية</button>
+</div>
+
+<div class="balance-card">
     <div class="balance-label">رصيدك الحالي</div>
     <div class="balance-amount" id="home-balance">0 ⭐</div>
     <div class="balance-stars" id="home-points">= 0 نقطة</div>
@@ -345,6 +405,60 @@ let user={id:null,name:'',pts:0,stars:0,tasks:0,referrals:0,withdrawn:0,refCode:
 let selectedMethod='binance';
 const API=window.location.origin+'/api';
 
+
+// === DAILY GIFT 3D ===
+let giftOpening=false;
+async function openDailyGift(){
+  if(giftOpening)return;
+  const btn=document.getElementById('gift3d-btn');
+  const box=document.getElementById('gift3d-box');
+  const reward=document.getElementById('gift3d-reward');
+  if(btn.disabled)return;
+  giftOpening=true;btn.disabled=true;
+  try{
+    const r=await fetch(`${API}/daily-gift/${user.id}`,{method:'POST'});
+    const d=await r.json();
+    if(!d.success){
+      showToast(d.error||'غير متاح',true);
+      btn.disabled=false;giftOpening=false;
+      if(d.remainingMs)startGiftCooldown(d.remainingMs);
+      return;
+    }
+    box.classList.add('opened');spawnConfetti();
+    reward.innerHTML=`+${d.reward} ⭐<span class="gift3d-tier tier-${d.tier}">${tierLabel(d.tier)}</span>`;
+    reward.classList.add('show');
+    user.pts=d.totalPts;user.stars=d.totalStars;
+    document.getElementById('gift3d-streak-num').textContent=d.streak;
+    updateUI();log('success','Gift +'+d.reward);
+    setTimeout(()=>{resetGift();startGiftCooldown(24*60*60*1000);},4000);
+  }catch(e){showToast('خطأ',true);btn.disabled=false;giftOpening=false;}
+}
+function tierLabel(t){return {common:'عادي',uncommon:'غير عادي',rare:'نادر',epic:'ملحمي',legendary:'أسطوري 🌟'}[t]||t;}
+function resetGift(){
+  document.getElementById('gift3d-box').classList.remove('opened');
+  const r=document.getElementById('gift3d-reward');r.classList.remove('show');r.textContent='';
+  giftOpening=false;
+}
+function startGiftCooldown(ms){
+  const btn=document.getElementById('gift3d-btn');btn.disabled=true;
+  const tick=()=>{ms-=1000;if(ms<=0){btn.disabled=false;btn.textContent='✨ افتح الهدية';return;}
+    const h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000),s=Math.floor((ms%60000)/1000);
+    btn.textContent=`⏳ ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    setTimeout(tick,1000);};tick();
+}
+function spawnConfetti(){
+  const stage=document.getElementById('gift3d-stage');
+  const colors=['#fbbf24','#ef4444','#10b981','#3b82f6','#a855f7','#ec4899'];
+  for(let i=0;i<30;i++){
+    const c=document.createElement('div');c.className='gift3d-confetti go';
+    c.style.background=colors[i%colors.length];c.style.left='50%';c.style.top='50%';
+    c.style.setProperty('--tx',(Math.random()*400-200)+'px');
+    c.style.setProperty('--ty',(Math.random()*-300-50)+'px');
+    c.style.borderRadius=Math.random()>.5?'50%':'2px';
+    stage.appendChild(c);setTimeout(()=>c.remove(),1700);
+  }
+}
+
 // === INIT ===
 document.addEventListener('DOMContentLoaded',()=>{
   initTG();loadUser();renderTasks();updateUI();log('info','✨ Rain Star loaded');
@@ -365,7 +479,7 @@ function initTG(){
 async function loadUser(){
   try{
     const r=await fetch(`${API}/user/${user.id}`);const d=await r.json();
-    if(d.success){user={...user,...d.user};updateUI();}
+    if(d.success){user={...user,...d.user};updateUI();if(d.user.lastDailyGift){const rem=24*60*60*1000-(Date.now()-d.user.lastDailyGift);if(rem>0)startGiftCooldown(rem);}document.getElementById('gift3d-streak-num').textContent=d.user.dailyStreak||0;}
   }catch(e){console.log(e);}
 }
 
@@ -644,7 +758,7 @@ function showModal(icon,title,text,cb){
 function closeModal(){document.getElementById('modal').classList.remove('show');}
 
 // === LOG ===
-function log(type,msg){console.log(`[${type.toUpperCase()}] ${msg});}
+function log(type,msg){console.log('['+type.toUpperCase()+'] '+msg);}
 </script>
 </body>
 </html>
